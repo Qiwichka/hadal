@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Хадаль</title>
+<meta name="description" content="Экспедиция к самой глубокой точке океана. Прокрутка ведёт вниз, на одиннадцать километров.">
+<meta name="theme-color" content="#02070c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%2302070c'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%237fe6d1'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@300..600&family=Unbounded:wght@200..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="sea" aria-hidden="true"></canvas>
+
+<header class="nav">
+  <a class="nav__brand" href="#top" data-go>Хадаль</a>
+  <nav class="nav__links" aria-label="Разделы">
+    <a href="#descent" data-go>Спуск</a>
+    <a href="#life" data-go>Обитатели</a>
+    <a href="#bottom" data-go>Дно</a>
+  </nav>
+  <a class="btn btn--ghost btn--sm" href="#join" data-go>Узнать о старте</a>
+</header>
+
+<aside class="gauge" aria-hidden="true">
+  <div class="gauge__read">
+    <p class="gauge__depth"><span id="gDepth">0</span> м</p>
+    <p class="gauge__press"><span id="gPress">1</span> атм</p>
+    <p class="gauge__zone" id="gZone">Солнечная зона</p>
+  </div>
+  <div class="gauge__ruler" id="gRuler">
+    <span class="gauge__tick" style="--i:0"><b>0</b></span>
+    <span class="gauge__tick" style="--i:1"><b>200</b></span>
+    <span class="gauge__tick" style="--i:2"><b>1 км</b></span>
+    <span class="gauge__tick" style="--i:3"><b>4 км</b></span>
+    <span class="gauge__tick" style="--i:4"><b>6 км</b></span>
+    <span class="gauge__tick" style="--i:5"><b>11 км</b></span>
+    <i class="gauge__mark" id="gMark"></i>
+  </div>
+</aside>
+
+<main id="top">
+
+  <section class="hero" data-depth="0">
+    <div class="hero__inner">
+      <h1 class="hero__title">
+        <span class="line"><span>Туда, где</span></span>
+        <span class="line"><span>нет <em>света</em></span></span>
+      </h1>
+      <p class="hero__lead" data-rise>Одиннадцать километров воды над головой. Экспедиция «Хадаль» идёт к самой глубокой точке океана.</p>
+      <div class="hero__cta" data-rise>
+        <a class="btn btn--primary" href="#descent" data-go>Начать спуск</a>
+        <a class="btn btn--ghost" href="#mission" data-go>О миссии</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifest" id="mission" data-depth="45">
+    <p class="manifest__text" id="manifest">Ниже тысячи метров солнечный свет не доходит совсем. Там холодно, давят сотни атмосфер, и большинство обитателей светится само.</p>
+  </section>
+
+  <section class="scene scene--left" id="descent" data-depth="90">
+    <div class="scene__num" aria-hidden="true">0</div>
+    <div class="scene__body" data-rise-group>
+      <h2>Солнечная зона</h2>
+      <p>От поверхности до 200 метров. Света здесь хватает для фотосинтеза: растёт фитопланктон, и на нём держится почти вся пищевая цепь океана.</p>
+    </div>
+  </section>
+
+  <section class="scene scene--right" data-depth="200">
+    <div class="scene__num" aria-hidden="true">200</div>
+    <div class="scene__body" data-rise-group>
+      <h2>Сумерки</h2>
+      <p>От 200 до 1000 метров. Света остаётся всё меньше, и синий гаснет последним. Каждую ночь отсюда к поверхности поднимаются огромные стаи животных, а к рассвету уходят обратно вниз.</p>
+    </div>
+  </section>
+
+  <section class="scene scene--center" data-depth="1000">
+    <div class="scene__num" aria-hidden="true">1000</div>
+    <div class="scene__body" data-rise-group>
+      <h2>Полночь</h2>
+      <p>От 1000 до 4000 метров. Солнце сюда не доходит, вода почти ледяная, около 4 градусов. Свет, который вы видите, принадлежит самим животным.</p>
+    </div>
+  </section>
+
+  <section class="life" id="life" data-depth="2600">
+    <h2 class="life__title">Обитатели полуночи</h2>
+    <div class="life__grid">
+      <ul class="life__list" id="lifeList">
+        <li><button type="button" class="life__btn is-on" data-i="0" aria-controls="specimen" aria-pressed="true">
+          <span class="life__name">Глубоководная медуза</span><span class="life__lat">Atolla wyvillei</span></button></li>
+        <li><button type="button" class="life__btn" data-i="1" aria-controls="specimen" aria-pressed="false">
+          <span class="life__name">Гребневик</span><span class="life__lat">Ctenophora</span></button></li>
+        <li><button type="button" class="life__btn" data-i="2" aria-controls="specimen" aria-pressed="false">
+          <span class="life__name">Удильщик</span><span class="life__lat">Melanocetus johnsonii</span></button></li>
+        <li><button type="button" class="life__btn" data-i="3" aria-controls="specimen" aria-pressed="false">
+          <span class="life__name">Сифонофора</span><span class="life__lat">Praya dubia</span></button></li>
+      </ul>
+      <div class="life__side">
+        <div class="life__stage">
+          <canvas id="specimen" role="img" aria-label="Анимация выбранного глубоководного животного"></canvas>
+        </div>
+        <div class="life__text" aria-live="polite">
+          <h3 id="spName">Глубоководная медуза</h3>
+          <p id="spText">Если на неё нападают, по краю колокола бежит кольцо вспышек. Это сигнал тревоги: он привлекает хищника покрупнее, который может съесть обидчика.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene scene--left" data-depth="4000">
+    <div class="scene__num" aria-hidden="true">4000</div>
+    <div class="scene__body" data-rise-group>
+      <h2>Бездна</h2>
+      <p>От 4000 до 6000 метров. Дно здесь устлано илом, давление выше 400 атмосфер. Еды мало, поэтому жизнь идёт медленно, а каждая находка на счету.</p>
+    </div>
+  </section>
+
+  <section class="scene scene--right" data-depth="6000">
+    <div class="scene__num" aria-hidden="true">6000</div>
+    <div class="scene__body" data-rise-group>
+      <h2>Хадаль</h2>
+      <p>Глубже 6000 метров начинаются океанические желоба. Зону назвали в честь Аида. Самая глубокая точка, Бездна Челленджера, лежит около 10 900 метров ниже поверхности, давление там больше тысячи атмосфер, и жизнь всё равно есть.</p>
+    </div>
+  </section>
+
+  <section class="join" id="join" data-depth="10900">
+    <span id="bottom" class="join__anchor"></span>
+    <h2 class="join__title"><span class="line"><span>Вы на дне</span></span></h2>
+    <p class="join__lead" data-rise>Оставьте почту, и мы напишем, когда аппарат уйдёт под воду.</p>
+    <form class="join__form" id="joinForm" novalidate data-rise>
+      <label for="mail">Электронная почта</label>
+      <div class="join__row">
+        <input id="mail" name="mail" type="email" inputmode="email" autocomplete="email" placeholder="name@example.ru" aria-describedby="mailHelp mailErr">
+        <button class="btn btn--primary" type="submit">Узнать о старте</button>
+      </div>
+      <p class="join__help" id="mailHelp">Одно письмо перед стартом, без рассылки.</p>
+      <p class="join__err" id="mailErr" role="alert" hidden></p>
+    </form>
+    <p class="join__ok" id="joinOk" role="status" hidden>Записали. Напишем перед стартом.</p>
+  </section>
+
+  <footer class="foot">
+    <p class="foot__mark" aria-hidden="true">Хадаль</p>
+    <p class="foot__note">Вымышленный проект. Сайт сделан ради самого погружения.</p>
+  </footer>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="js/sea.js"></script>
+<script src="js/specimens.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
